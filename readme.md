@@ -1,12 +1,16 @@
-# FT_LINUX
+# Ft_Linux
 
-My Linux distro from scratch 
+<div align="center">
+  <img src="./documentation/images/penguin.webp" alt="Computer GIF" height="500" width="1200" />
+</div>
 
-## How i've done it 
+My Linux distribution from **scratch**.
 
-You can look at all the creation process right [here](./assets/tutorial.md)
+## Making Process
+
+- [Tutorial from A to Z](./documentation/tutorial.md)
 
 
-## Links
+### Links
 
 [Ubuntu host system iso](https://ubuntu.com/download/desktop/thank-you?version=26.04.1&architecture=amd64&lts=true)
