@@ -2,6 +2,8 @@
 
 
 1. [setup-the-host-system](#setup-the-host-system)
+2. [partioning](#partioning)
+
 
 ## Setup the host system.
 
@@ -65,4 +67,24 @@ To develop this `Linux from scratch` i need a Host system, i choose [ubuntu](htt
 
 <div align="center">
   <img src="./images/vm_snapshot.png"/>
+</div>
+
+---
+
+## Partioning
+
+[creatingpartition - www.linuxfromscratch.org](https://www.linuxfromscratch.org/lfs/view/stable/chapter02/creatingpartition.html)
+
+[Fdisk man](https://man.archlinux.org/man/fdisk.8.en)
+
+```shell
+free -h
+```
+
+```shell
+sudo fdisk -l
+```
+
+<div align="center">
+  <img src="./images/part_infoprimary.png"/>
 </div>

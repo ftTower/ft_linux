@@ -12,7 +12,7 @@ My Linux distribution from **scratch**.
 
 ---
 
-### Links
+### Ressources
 
-- [Ubuntu host system iso](https://ubuntu.com/download/desktop/thank-you)
-- [First Ressource](https://www.linuxfromscratch.org/lfs/view/stable/index.html)
+- [www.linuxfromscratch.org](https://www.linuxfromscratch.org/lfs/view/stable/index.html)
+
