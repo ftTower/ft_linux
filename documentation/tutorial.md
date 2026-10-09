@@ -77,7 +77,8 @@ To develop this `Linux from scratch` i need a Host system, i choose [ubuntu](htt
 
 Creating the partitions is often done with two main tools : [cfdisk](https://fr.wikipedia.org/wiki/Cfdisk) and [fdisk](https://fr.wikipedia.org/wiki/Fdisk), the main difference beetween them is graphical.
 
-In my case i will use `Fdisk`.
+> [!NOTE]
+> In my case i will use `Fdisk`.
 
 Here you can find the [Fdisk man](https://man.archlinux.org/man/fdisk.8.en).
 
