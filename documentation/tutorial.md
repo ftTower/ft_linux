@@ -1,9 +1,17 @@
 # Tutorial from A to Z
 
-
+### [Host system creation](#host-system-creation-1)
 1. [setup-the-host-system](#setup-the-host-system)
 2. [partition](#partition)
+3. [Creating a file system](#creating-a-file-system) 
+### Build the kernel
 
+<br>
+<br>
+<br>
+---
+
+# Host system creation
 
 ## Setup the host system.
 
@@ -101,13 +109,16 @@ sudo fdisk -l # you can try this without risk on your personal laptop for educat
 
 The next step will be to create our personal partitions for our distribution. 
 
-> [!WARNING]
-> Constraints 
+> [!CAUTION]
+> School subject :  
 > You must use at least 3 different partitions: root, /boot and a swap partition. You
 > can, of course, make more partitions if you want to.
-```
+
 
 ### Partitions Explanation
+
+> [!WARNING]
+> You have the choice for the size of each partition, but you have to refer to the tutorial to see the minimum required
 
 - **root** - *35go* : This will contain all the linux file system, this is the only mandatory partition for linux to work. (common format : ext4, btrfs, xfs)
 - **/boot** - *1go* : Contain all the files necessary for starting the system. Nowadays the main reasons to separate it from root is to load the program who ask the disk password if the root partition is encrypted, and if you use complex storage like RAID for servers  
@@ -131,3 +142,12 @@ To facilitate the export of my LFS and the developpement practicity, i will crea
 ```shell
 free -h # take a look at the swap partition
 ```
+
+## Creating a file system 
+
+[Creating a file system](https://www.linuxfromscratch.org/lfs/view/stable/chapter02/creatingfilesystem.html)
+[Comparison_of_file_systems](https://en.wikipedia.org/wiki/Comparison_of_file_systems)
+
+## Setting LFS variable and umask
+
+[LFS/UMASK](https://www.linuxfromscratch.org/lfs/view/stable/chapter02/aboutlfs.html)
