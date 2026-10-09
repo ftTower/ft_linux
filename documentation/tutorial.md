@@ -101,11 +101,10 @@ sudo fdisk -l # you can try this without risk on your personal laptop for educat
 
 The next step will be to create our personal partitions for our distribution. 
 
-### Constraints 
-
-```
-You must use at least 3 different partitions: root, /boot and a swap partition. You
-can, of course, make more partitions if you want to.
+> [!WARNING]
+> Constraints 
+> You must use at least 3 different partitions: root, /boot and a swap partition. You
+> can, of course, make more partitions if you want to.
 ```
 
 ### Partitions Explanation
