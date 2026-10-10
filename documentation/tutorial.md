@@ -74,13 +74,94 @@ To facilitate the export of my LFS and the developpement practicity, i will crea
 
 Finally we can create partitions, i used [this](https://doc.ubuntu-fr.org/fdisk) tutorial explaning how to use fdisk utilities.
 
-List all partitions with `sudo fdisk -l` (our new virtual disk must be /dev/sdb)
+List all partitions with `sudo fdisk -l` 
+
+> [!CAUTION]
+> our new virtual disk must be /dev/sdb but it is possible to have another name if you have already more vdisk, in my tutorial i will assume you have `sdb` but adapt it to your case.
 
 <div align="center">
   <img src="./images/part_showsdb.png"/>
 </div>
 
+Next step is to enter edit mode with `fdisk` using ```sudo fdisk /dev/sdb```
 
+To be secure with my new virtual disk the first thing i do is just `o` it will 
+create a new fresh [MBR DOS table.](https://en.wikipedia.org/wiki/Master_boot_record)
+<div align="center">
+  <img src="./images/part_showsdb.png"/>
+</div>
+
+### Creating /boot partition
+
+> [!WARNING]
+> On my screenshots i forgot to add the `G` after end size sector
+> Ex: +1G
+
+```bash
+# in fdisk console
+n -> new partition
+p -> primary partition
+1 -> first partition
+ENTER -> default first sector
++1G -> 1go Partition
+a -> make the partition bootable
+```
+<div align="center">
+  <img src="./images/part_createboot.png"/>
+</div>
+
+### Creating swap partition
+
+> [!WARNING]
+> On my screenshots i forgot to add the `G` after end size sector
+> Ex: +4G
+
+```bash
+# in fdisk console
+n -> new partition
+p -> primary partition
+2 -> second partition
+ENTER -> default first sector
++4G -> 1go Partition
+
+t -> change type of partition
+2 -> second partition
+82 -> linux swap hex code
+```
+<div align="center">
+  <img src="./images/part_createswap.png"/>
+</div>
+
+### Creating root partition
+
+```bash
+# in fdisk console
+n -> new partition
+p -> primary partition
+3 -> third partition
+ENTER -> default first sector
+ENTER -> fill the rest of vdisk
+```
+<div align="center">
+  <img src="./images/part_createroot.png"/>
+</div>
+
+### Finishing
+
+to clean escape from fdisk console enter `w`
+
+### Formating
+
+```
+# Formatage du /boot (l'ext4 est parfait, ou ext2 si le manuel le précise)
+sudo mkfs -v -t ext4 /dev/sdb1
+
+# Initialisation du Swap
+sudo mkswap /dev/sdb2
+
+# Formatage de la racine /
+sudo mkfs -v -t ext4 /dev/sdb3
+```
 
 ## Creating a file system 
 
