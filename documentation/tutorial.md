@@ -1,83 +1,19 @@
 # Tutorial from A to Z
 
-### [Host system creation](#host-system-creation-1)
-1. [setup-the-host-system](#setup-the-host-system)
+
+1. [system host creation](./hostcreation.md)
 2. [partition](#partition)
 3. [Creating a file system](#creating-a-file-system) 
-### Build the kernel
+
 
 <br>
 <br>
 <br>
----
 
-# Host system creation
+# System host creation
 
-## Setup the host system.
-
-To develop this `Linux from scratch` i need a Host system, i choose [ubuntu](https://ubuntu.com/download/desktop) desktop but you can do it with **any** linux distribution.
-
----
-
-### Create the virtual machine following those steps :
-
-> Im using `virtualbox-7.2_7.2.20` for `debian 13.6`.
-
-<div align="center">
-  <img src="./images/vm_creation.png"/>
-</div>
-
----
-
-> Choose a easy password you will remember.
-
-<div align="center">
-  <img src="./images/vm_auth.png"/>
-</div>
-
----
-
-> Choose (RAM / CPU / DISK) in function of your computer.
-
-<div align="center">
-  <img src="./images/vm_vhardware.png"/>
-</div>
-
----
-
-> Let it load Ubuntu.
-
-<div align="center">
-  <img src="./images/vm_start.png"/>
-</div>
-
----
-
-> Those settings are up to you.
-
-<div align="center">
-  <img src="./images/vm_welcome.png"/>
-</div>
-
----
-
-> Finally the host system is up and functional.
-
-<div align="center">
-  <img src="./images/vm_welcome2.png"/>
-</div>
-
----
-
----
-
-> Let save this part with a snapshot `otherwhise on the machine : Host + T`
-
-<div align="center">
-  <img src="./images/vm_snapshot.png"/>
-</div>
-
----
+> [!CAUTION]
+> You have to follow the [system host creation](./hostcreation.md) described in another **.md** before continuing 
 
 ## Partition
 
@@ -126,8 +62,6 @@ The next step will be to create our personal partitions for our distribution.
 
 ---
 
-To create the partition i used [this](https://doc.ubuntu-fr.org/fdisk) tutorial explaning with fdisk utilities.
-
 To facilitate the export of my LFS and the developpement practicity, i will create a new virtual disk attached to my host system.
 
 <div align="center">
@@ -138,16 +72,26 @@ To facilitate the export of my LFS and the developpement practicity, i will crea
   <img src="./images/part_paramhdisk.png"/>
 </div>
 
+Finally we can create partitions, i used [this](https://doc.ubuntu-fr.org/fdisk) tutorial explaning how to use fdisk utilities.
 
-```shell
-free -h # take a look at the swap partition
-```
+List all partitions with `sudo fdisk -l` (our new virtual disk must be /dev/sdb)
+
+<div align="center">
+  <img src="./images/part_showsdb.png"/>
+</div>
+
+
 
 ## Creating a file system 
 
 [Creating a file system](https://www.linuxfromscratch.org/lfs/view/stable/chapter02/creatingfilesystem.html)
+
 [Comparison_of_file_systems](https://en.wikipedia.org/wiki/Comparison_of_file_systems)
 
 ## Setting LFS variable and umask
 
 [LFS/UMASK](https://www.linuxfromscratch.org/lfs/view/stable/chapter02/aboutlfs.html)
+
+```shell
+free -h # take a look at the swap partition
+```
