@@ -122,7 +122,7 @@ n -> new partition
 p -> primary partition
 2 -> second partition
 ENTER -> default first sector
-+4G -> 1go Partition
++4G -> 4go Partition
 
 t -> change type of partition
 2 -> second partition
@@ -146,33 +146,84 @@ ENTER -> fill the rest of vdisk
   <img src="./images/part_createroot.png"/>
 </div>
 
-### Finishing
+### Exit fdisk console
 
 to clean escape from fdisk console enter `w`
 
-### Formating
+### Creating a file system 
 
-```
-# Formatage du /boot (l'ext4 est parfait, ou ext2 si le manuel le précise)
+> [!TIP]
+> If you dont understand why those partitions need to be formated please read the chapter02 link below.
+
+[Chapter02 : Creating a file system](https://www.linuxfromscratch.org/lfs/view/stable/chapter02/creatingfilesystem.html) 
+
+
+Normaly the "name" of each partition will follow the order we make them. 
+
+We can take a look again with `sudo fdisk -l` to make sure.
+<div align="center">
+  <img src="./images/part_checksdb.png"/>
+</div>
+
+We want /boot and /root to be in the last version of ext `4`, the first thing to do is using [mkfs](https://linux.die.net/man/8/mkfs).
+
+> [!CAUTION]
+> Dont forget to change numbers if your boot/root is different
+
+```bash
 sudo mkfs -v -t ext4 /dev/sdb1
-
-# Initialisation du Swap
-sudo mkswap /dev/sdb2
-
-# Formatage de la racine /
 sudo mkfs -v -t ext4 /dev/sdb3
 ```
 
-## Creating a file system 
+```
+-V
+Produce verbose output, including all file system-specific commands that are executed. Specifying this option more than once inhibits execution of any file system-specific commands. This is really only useful for testing.
 
-[Creating a file system](https://www.linuxfromscratch.org/lfs/view/stable/chapter02/creatingfilesystem.html)
+-t fstype
+Specifies the type of file system to be built. If not specified, the default file system type (currently ext2) is used.
+```
+
+Next step is to make the swap partiton swapable with [mkswap](https://manpages.ubuntu.com/manpages/trusty/man8/mkswap.8.html)
+
+```
+sudo mkswap /dev/sdb2
+```
 
 [Comparison_of_file_systems](https://en.wikipedia.org/wiki/Comparison_of_file_systems)
 
 ## Setting LFS variable and umask
 
-[LFS/UMASK](https://www.linuxfromscratch.org/lfs/view/stable/chapter02/aboutlfs.html)
+[Chapter02 : LFS VAR/UMASK](https://www.linuxfromscratch.org/lfs/view/stable/chapter02/aboutlfs.html)
 
-```shell
-free -h # take a look at the swap partition
+
+To ease ourself, we make a env variable pointing the directory we want our LFS to be mounted.
+```bash
+export LFS=/mnt/lfs
+```
+
+And set the mode creation mask to `022`
+```
+umask 022
+``` 
+> Setting the umask to 022 ensures that newly created files and directories are only writable by their owner, but are readable and searchable (only for directories) by anyone
+
+## Mounting the new root partition
+
+[Chapter02 : Mounting the New Partition](https://www.linuxfromscratch.org/lfs/view/stable/chapter02/mounting.html)
+
+```
+sudo mkdir -pv $LFS
+```
+
+```
+sudo mount -v -t ext4 /dev/sdb3 $LFS
+```
+
+```
+sudo chown root:root $LFS
+sudo chmod 755 $LFS
+```
+
+```
+sudo /sbin/swapon -v /dev/sdb2
 ```
