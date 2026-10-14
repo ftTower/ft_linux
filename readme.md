@@ -12,7 +12,5 @@ My Linux distribution from **scratch**.
 
 ---
 
-### Ressources
 
-- [www.linuxfromscratch.org](https://www.linuxfromscratch.org/lfs/view/stable/index.html)
 
