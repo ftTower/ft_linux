@@ -16,7 +16,7 @@ SOURCES_DIR=$(find . -type d -name sources 2>/dev/null)
 
 #?========================== MAIN ===============================
 
-SOURCES_DIR=$(cat $MANDATORY_PACKAGES_LINKS_FILE | grep -oP "(?<=/)[^/]+?(?=\.tar\.[a-z0-9]+$|$)")
+ALL_INSTALLED_PACKAGES=$(cat $MANDATORY_PACKAGES_LINKS_FILE | grep -oP "(?<=/)[^/]+?(?=\.tar\.[a-z0-9]+$|$)")
 
 for pack in $SOURCES_DIR; do 
     INSTALLED=$(echo $ALL_INSTALLED_PACKAGES | grep $pack)
