@@ -13,5 +13,5 @@ sudo wget https://www.linuxfromscratch.org/lfs/view/stable/wget-list-sysv -P $LF
 ```
 
 ```
-
+wget --input-file=$LFS/sources/wget-list-sysv --continue --directory-prefix=$LFS/sources
 ```

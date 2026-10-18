@@ -194,10 +194,16 @@ umask 022
 
 [Chapter02 : Mounting the New Partition](https://www.linuxfromscratch.org/lfs/view/stable/chapter02/mounting.html)
 
+First we will need to create a directory where the LFS will be located.
+
+> `-p` will create all parents directories
+> `-v` verbose mode for more outputs
+
 ```
 sudo mkdir -pv $LFS
 ```
 
+Next we will mount the `/root` partition of `35go` into the new LFS directory  
 ```
 sudo mount -v -t ext4 /dev/sdb3 $LFS
 ```
