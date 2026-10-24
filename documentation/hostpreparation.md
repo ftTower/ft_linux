@@ -10,7 +10,7 @@ Creating the partitions is often done with two main tools : [cfdisk](https://fr.
 Here you can find the [Fdisk man](https://man.archlinux.org/man/fdisk.8.en).
 
 The first parameter i used is `-l`, this will **list all partitions** already on your **host system**.
-```shell
+```bash
 sudo fdisk -l # you can try this without risk on your personal laptop for education purpose.
 ```
 
@@ -168,7 +168,7 @@ Specifies the type of file system to be built. If not specified, the default fil
 
 Next step is to make the swap partiton swapable with [mkswap](https://manpages.ubuntu.com/manpages/trusty/man8/mkswap.8.html)
 
-```
+```bash
 sudo mkswap /dev/sdb2
 ```
 
@@ -185,7 +185,7 @@ export LFS=/mnt/lfs
 ```
 
 And set the mode creation mask to `022`
-```
+```bash
 umask 022
 ``` 
 > Setting the umask to 022 ensures that newly created files and directories are only writable by their owner, but are readable and searchable (only for directories) by anyone
@@ -199,20 +199,20 @@ First we will need to create a directory where the LFS will be located.
 > `-p` will create all parents directories
 > `-v` verbose mode for more outputs
 
-```
+```bash
 sudo mkdir -pv $LFS
 ```
 
-Next we will mount the `/root` partition of `35go` into the new LFS directory  
-```
+Next we will mount the `/root` partition of `35go` into the new LFS directory.
+```bash
 sudo mount -v -t ext4 /dev/sdb3 $LFS
 ```
 
-```
+```bash
 sudo chown root:root $LFS
 sudo chmod 755 $LFS
 ```
 
-```
+```bash
 sudo /sbin/swapon -v /dev/sdb2
 ```

@@ -8,3 +8,4 @@
 ## Ressources
 
 - [www.linuxfromscratch.org](https://www.linuxfromscratch.org/lfs/view/stable/index.html)
+- [GNU automake](https://www.gnu.org/software/automake/manual/html_node/index.html#SEC_Contents)
