@@ -208,11 +208,13 @@ Next we will mount the `/root` partition of `35go` into the new LFS directory.
 sudo mount -v -t ext4 /dev/sdb3 $LFS
 ```
 
+This will change the owner of LFS for the user `root`
 ```bash
 sudo chown root:root $LFS
-sudo chmod 755 $LFS
+sudo chmod 755 $LFS #rwxr-xr-x
 ```
 
+The command sudo `/sbin/swapon` enables swap space (virtual memory) on a Linux system using root privileges.
 ```bash
 sudo /sbin/swapon -v /dev/sdb2
 ```

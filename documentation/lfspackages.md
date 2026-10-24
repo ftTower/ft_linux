@@ -1,82 +1,48 @@
 # Installing sources packages
 
+## Downloading Sources
+
+We need to make a directory to host the sources.
+
 ```bash
 sudo mkdir -v $LFS/sources 
 ```
 
+and make it sticky.
+
+> ![NOTE]
+> A sticky directory (or a directory with the sticky bit set) is a shared folder on Unix-like systems where only the file owner, the directory owner, or the root user can delete or rename files
 ```bash
 sudo chmod -v a+wt $LFS/sources
 ```
 
+Next step is to download the file containing all the lfs sources links.
+
 ```bash
 sudo wget https://www.linuxfromscratch.org/lfs/view/stable/wget-list-sysv -P $LFS/sources/
 ```
+> ![TIP]
+> I decide to download files like `wget-list-sysv` or after `md5sums` with root user to avoid being block after with a user who will not remain on my lfs. 
 
+And use it to download all the sources with wget into the directory `$LFS/sources`
 ```bash
 sudo wget --input-file=$LFS/sources/wget-list-sysv --continue --directory-prefix=$LFS/sources
 ```
+
+<div align="center">
+  <img src="./images/packages_sum.png"/>
+</div>
+
+```bash
+sudo wget https://www.linuxfromscratch.org/lfs/view/stable/md5sums -P $LFS/sources/
+```
+
+This next command will use that new file to compare the checksum.
+> ![NOTE]
+> This is great to verify that all our sources have encounter no problems during the downloads
 
 ```bash
 pushd $LFS/sources
   md5sum -c md5sums
 popd
-```
-
-```bash
-groupadd lfs
-useradd -s /bin/bash -g lfs -m -k /dev/null lfs
-```
-
-```bash
-sudo passwd lfs
-```
-
-```bash
-chown -v lfs $LFS/{usr{,/*},var,etc,tools}
-case $(uname -m) in
-  x86_64) chown -v lfs $LFS/lib64 ;;
-esac
-```
-
-```bash
-cat > ~/.bash_profile << "EOF"
-exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash
-EOF
-```
-
-```bash
-cat > ~/.bashrc << "EOF"
-set +h
-umask 022
-LFS=/mnt/lfs
-LC_ALL=POSIX
-LFS_TGT=$(uname -m)-lfs-linux-gnu
-PATH=/usr/bin
-if [ ! -L /bin ]; then PATH=/bin:$PATH; fi
-PATH=$LFS/tools/bin:$PATH
-CONFIG_SITE=$LFS/usr/share/config.site
-export LFS LC_ALL LFS_TGT PATH CONFIG_SITE
-EOF
-```
-
-```bash
-[ ! -e /etc/bash.bashrc ] || sudo mv -v /etc/bash.bashrc /etc/bash.bashrc.NOUSE
-```
-
-```bash
-nproc
-```
-
-```bash
-export MAKEFLAGS=-j3
-```
-
-```bash
-cat >> ~/.bashrc << "EOF"
-export MAKEFLAGS=-j$(nproc)
-EOF
-```
-
-```bash
-source ~/.bash_profile
 ```

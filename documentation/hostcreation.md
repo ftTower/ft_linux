@@ -63,3 +63,9 @@ To develop this `Linux from scratch` i need a Host system, i choose [ubuntu](htt
 <div align="center">
   <img src="./images/vm_snapshot.png"/>
 </div>
+
+<br>
+<br>
+<br>
+
+# Next Part : [Preparing the Host System](./hostpreparation.md)
