@@ -39,7 +39,7 @@ sudo wget https://www.linuxfromscratch.org/lfs/view/stable/md5sums -P $LFS/sourc
 
 This next command will use that new file to compare the checksum.
 > ![NOTE]
-> This is great to verify that all our sources have encounter no problems during the downloads
+> This is great to verify that all our sources have encounter no problems during the downloads.
 
 ```bash
 pushd $LFS/sources

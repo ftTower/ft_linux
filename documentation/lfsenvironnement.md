@@ -2,29 +2,40 @@
 
 ## Creating a Limited Directory Layout
 
+First we need to create the basic directory for our lfs.
+
 ```bash
-sudo mkdir -pv $LFS/{etc,var} $LFS/usr/{bin,lib,sbin}
+sudo mkdir -pv $LFS/{etc,var} $LFS/usr/{bin,lib,sbin} # make etc+var in root directory and add bin+lib+sbin in the usr directory
 
 for i in bin lib sbin; do
-  sudo ln -sv usr/$i $LFS/$i
+  sudo ln -sv usr/$i $LFS/$i # for each one make a symbolic link into the root 
 done
 
 case $(uname -m) in
-  x86_64) sudo mkdir -pv $LFS/lib64 ;;
+  x86_64) sudo mkdir -pv $LFS/lib64 ;; # in case the system is under x64/84 architecture make a lib64 into root
 esac
 ```
 
+make a `tools` directory for the compiled sources 
 ```bash
 mkdir -pv $LFS/tools
 ```
 
 ## Creating The First User
 
+We are gonna make the first user for our lfs in the group lfs 
 ```bash
 groupadd lfs
 useradd -s /bin/bash -g lfs -m -k /dev/null lfs
 ```
 
+> `-s` specify the default bash for the created user
+> `-g lfs` add this user to the group lfs
+> `-m` this create a home directory for the user
+> `-k /dev/null` this parameter prevents possible copying of files from a skeleton directory 
+> `lfs` the user created
+
+put a password on the `lfs` user with :
 ```bash
 sudo passwd lfs
 ```
