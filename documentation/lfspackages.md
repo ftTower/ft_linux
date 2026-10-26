@@ -46,3 +46,5 @@ pushd $LFS/sources
   md5sum -c md5sums
 popd
 ```
+
+# Next part : [Creating LFS env and first user](./lfsenvironnement.md)

@@ -218,3 +218,5 @@ The command sudo `/sbin/swapon` enables swap space (virtual memory) on a Linux s
 ```bash
 sudo /sbin/swapon -v /dev/sdb2
 ```
+
+# Next part : [Installing Sources](./lfspackages.md)
