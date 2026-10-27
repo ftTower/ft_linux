@@ -208,6 +208,11 @@ Next we will mount the `/root` partition of `35go` into the new LFS directory.
 sudo mount -v -t ext4 /dev/sdb3 $LFS
 ```
 
+You can verify the mountpoint with this command : 
+```bash
+mountpoint $LFS
+```
+
 This will change the owner of LFS for the user `root`
 ```bash
 sudo chown root:root $LFS

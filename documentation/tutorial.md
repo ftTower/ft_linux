@@ -133,3 +133,8 @@ sudo apt install bison gawk m4 texinfo
 ```bash
 sudo ln -sf bash /bin/sh && ls -l /bin/sh
 ```
+
+> You should have :
+<div align="center">
+  <img src="./images/hostrequirements.png"/>
+</div>
