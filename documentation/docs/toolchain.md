@@ -6,7 +6,7 @@
 > Those screenshot are from my personnal computer
 
 <div align="center">
-  <img src="./images/cross_triplet.png"/>
+  <img src="../images/cross_triplet.png"/>
 </div>
 
 ```bash
@@ -16,7 +16,7 @@ gcc -dumpmachine
 <br>
 
 <div align="center">
-  <img src="./images/cross_interpreter.png"/>
+  <img src="../images/cross_interpreter.png"/>
 </div>
 
 ```bash

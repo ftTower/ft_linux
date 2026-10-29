@@ -121,7 +121,7 @@ sudo ln -sf bash /bin/sh && ls -l /bin/sh
 
 > You should have 0 ERROR to continue on this.
 <div align="center">
-  <img src="./images/hostrequirements.png"/>
+  <img src="../images/hostrequirements.png"/>
 </div>
 
 ## Creating Partitions
@@ -142,14 +142,14 @@ sudo fdisk -l # you can try this without risk on your personal laptop for educat
 
 > You will see many `/dev/loopX`, those are packages mounted like virtual disk by linux to use them without decompressing them.
 <div align="center">
-  <img src="./images/part_fdiskloop.png"/>
+  <img src="../images/part_fdiskloop.png"/>
 </div>
 
 > This is the interesting part, you will see two partitions made on the virtual disk.
 - `/dev/sda1` of 1MB is the partition needed to host the boot.
 - `/dev/sda2` of 25GB is the partition for the root directory (where all will be stocked).
 <div align="center">
-  <img src="./images/part_fdisksda.png"/>
+  <img src="../images/part_fdisksda.png"/>
 </div>
 
 The next step will be to create our personal partitions for our distribution. 
@@ -174,11 +174,11 @@ The next step will be to create our personal partitions for our distribution.
 To facilitate the export of my LFS and the developpement practicity, i will create a new virtual disk attached to my host system.
 
 <div align="center">
-  <img src="./images/part_createhdisk.png"/>
+  <img src="../images/part_createhdisk.png"/>
 </div>
 
 <div align="center">
-  <img src="./images/part_paramhdisk.png"/>
+  <img src="../images/part_paramhdisk.png"/>
 </div>
 
 Finally we can create partitions, i used [this](https://doc.ubuntu-fr.org/fdisk) tutorial explaning how to use fdisk utilities.
@@ -189,7 +189,7 @@ List all partitions with `sudo fdisk -l`
 > our new virtual disk must be /dev/sdb but it is possible to have another name if you have already more vdisk, in my tutorial i will assume you have `sdb` but adapt it to your case.
 
 <div align="center">
-  <img src="./images/part_showsdb.png"/>
+  <img src="../images/part_showsdb.png"/>
 </div>
 
 Next step is to enter edit mode with `fdisk` using ```sudo fdisk /dev/sdb```
@@ -197,7 +197,7 @@ Next step is to enter edit mode with `fdisk` using ```sudo fdisk /dev/sdb```
 To be secure with my new virtual disk the first thing i do is just `o` it will 
 create a new fresh [MBR DOS table.](https://en.wikipedia.org/wiki/Master_boot_record)
 <div align="center">
-  <img src="./images/part_showsdb.png"/>
+  <img src="../images/part_showsdb.png"/>
 </div>
 
 ### Creating /boot partition
@@ -216,7 +216,7 @@ ENTER -> default first sector
 a -> make the partition bootable
 ```
 <div align="center">
-  <img src="./images/part_createboot.png"/>
+  <img src="../images/part_createboot.png"/>
 </div>
 
 ### Creating swap partition
@@ -238,7 +238,7 @@ t -> change type of partition
 82 -> linux swap hex code
 ```
 <div align="center">
-  <img src="./images/part_createswap.png"/>
+  <img src="../images/part_createswap.png"/>
 </div>
 
 ### Creating root partition
@@ -252,7 +252,7 @@ ENTER -> default first sector
 ENTER -> fill the rest of vdisk
 ```
 <div align="center">
-  <img src="./images/part_createroot.png"/>
+  <img src="../images/part_createroot.png"/>
 </div>
 
 ### Exit fdisk console
@@ -271,7 +271,7 @@ Normaly the "name" of each partition will follow the order we make them.
 
 We can take a look again with `sudo fdisk -l` to make sure.
 <div align="center">
-  <img src="./images/part_checksdb.png"/>
+  <img src="../images/part_checksdb.png"/>
 </div>
 
 We want /boot and /root to be in the last version of ext `4`, the first thing to do is using [mkfs](https://linux.die.net/man/8/mkfs).

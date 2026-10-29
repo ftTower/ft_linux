@@ -30,7 +30,7 @@ sudo wget --input-file=$LFS/sources/wget-list-sysv --continue --directory-prefix
 ```
 
 <div align="center">
-  <img src="./images/packages_sum.png"/>
+  <img src="../images/packages_sum.png"/>
 </div>
 
 This file is a list of shasum next to linked packages name, we will using it to verify that we have the exact same file from the creator.

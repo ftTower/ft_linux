@@ -241,7 +241,7 @@ sudo mount -vt tmpfs tmpfs $LFS/run
 ```
 
 <div align="center">
-  <img src="./images/backupmount.png"/>
+  <img src="../images/backupmount.png"/>
 </div>
 
 ```bash
@@ -253,7 +253,7 @@ fi
 ```
 
 <div align="center">
-  <img src="./images/backupmount.png"/>
+  <img src="../images/backupmount.png"/>
 </div>
 
 
