@@ -1,10 +1,11 @@
-# Tutorial from A to Z
+# Walktrough from LFS book (12.4)
 
+<!-- 
 1. [Creating the Host sytem](./hostcreation.md)
 2. [Preparing the Host System](./hostpreparation.md)
 3. [Installing Sources](./lfspackages.md)
 4. [Creating LFS env and first user](./lfsenvironnement.md)
-5. [Cross compiling the tool chain](./toolchain.md)
+5. [Cross compiling the tool chain](./toolchain.md) -->
 
 ## Ressources
 
