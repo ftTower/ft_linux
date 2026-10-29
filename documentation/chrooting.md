@@ -174,5 +174,101 @@ chmod -v 600  /var/log/btmp
 2. [Bison](https://www.linuxfromscratch.org/lfs/view/stable/chapter07/bison.html)
 3. [Pearl](https://www.linuxfromscratch.org/lfs/view/stable/chapter07/perl.html)
 4. [Python](https://www.linuxfromscratch.org/lfs/view/stable/chapter07/Python.html)
+5. [Texinfo](https://www.linuxfromscratch.org/lfs/view/stable/chapter07/texinfo.html)
+6. [Util-linux](https://www.linuxfromscratch.org/lfs/view/stable/chapter07/util-linux.html)
 
+## Cleaning and Backup
+
+```bash
+rm -rf /usr/share/{info,man,doc}/*
+```
+
+```bash
+find /usr/{lib,libexec} -name \*.la -delete
+```
+
+```bash
+exit
+```
+
+```bash
+mountpoint -q $LFS/dev/shm && umount $LFS/dev/shm
+```
+
+```bash
+umount $LFS/dev/pts
+```
+
+```bash
+umount $LFS/{sys,proc,run,dev}
+```
+
+```bash
+cd $LFS
+```
+
+```bash
+tar -cJpf $HOME/lfs-temp-tools-12.4.tar.xz .
+```
+
+## RESTORE FROM BACKUP
+
+[DOC](https://www.linuxfromscratch.org/lfs/view/stable/chapter07/cleanup.html)
+
+> [!WARNING]
+> BE CAREFUL THIS CAN DELETE THE HOST SYSTEM IF NOT IN $LFS
+
+```bash
+cd $LFS
+rm -rf ./*
+tar -xpf $HOME/lfs-temp-tools-12.4.tar.xz
+```
+
+
+Before continuing to chapter 8, remount all virtual file system.
+```bash
+findmnt | grep $LFS
+```
+
+[Remount all virtual file system](https://www.linuxfromscratch.org/lfs/view/stable/chapter07/kernfs.html)
+
+```bash
+sudo mount -v --bind /dev $LFS/dev
+sudo mount -vt devpts devpts -o gid=5,mode=0620 $LFS/dev/pts
+sudo mount -vt proc proc $LFS/proc
+sudo mount -vt sysfs sysfs $LFS/sys
+sudo mount -vt tmpfs tmpfs $LFS/run
+```
+
+<div align="center">
+  <img src="./images/backupmount.png"/>
+</div>
+
+```bash
+if [ -h $LFS/dev/shm ]; then
+  sudo install -v -d -m 1777 $LFS$(realpath /dev/shm)
+else
+  sudo mount -vt tmpfs -o nosuid,nodev tmpfs $LFS/dev/shm
+fi
+```
+
+<div align="center">
+  <img src="./images/backupmount.png"/>
+</div>
+
+
+[Rechroot](https://www.linuxfromscratch.org/lfs/view/stable/chapter07/chroot.html)
+
+Re-enter in $LFS with this `chroot`.
+
+```bash
+chroot "$LFS" /usr/bin/env -i   \
+    HOME=/root                  \
+    TERM="$TERM"                \
+    PS1='(lfs chroot) \u:\w\$ ' \
+    PATH=/usr/bin:/usr/sbin     \
+    MAKEFLAGS="-j$(nproc)"      \
+    TESTSUITEFLAGS="-j$(nproc)" \
+    /bin/bash --login
+```
 
