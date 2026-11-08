@@ -8,9 +8,8 @@ My Linux distribution from **scratch**.
 
 ## Making Process
 
-- [Tutorial from A to Z](./documentation/tutorial.md)
+- [Process Walkthroug](./docs/tutorial.md)
 
----
 
 
 

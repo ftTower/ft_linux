@@ -1,9 +1,9 @@
-# Cross Compiling Sources
+# Cross-Compiling the Toolchain
 
-## Pre-Ressources
+## Preliminary Information
 
 > [!NOTE]
-> Those screenshot are from my personnal computer
+> These screenshots were taken on my personal computer.
 
 <div align="center">
   <img src="../images/cross_triplet.png"/>
@@ -29,26 +29,26 @@ readelf -l <name of binary> | grep interpreter
 ## Compilation Instructions
 
 > [!NOTE]
-> DO NOT USE ROOT (use lfs user)
-> Compile all packages in a directory accessible by chroot (into $LFS)
-> All compilation are not the same follow the manual
+> Do not use the `root` user. Use the `lfs` user.
+> Compile all packages in a directory that is accessible from the chroot environment, such as `$LFS`.
+> The compilation steps differ between packages. Follow the LFS book for each package.
 
-Compiling a sources package : 
+To compile a source package:
 
-1. Untar the archive ```tar -xf <package>.tar.gz```
-2. Enter the created directory ```cd <package>```
-3. Follow guide for specific compilation 
-4. return to sources ```cd $LFS/sources```
-5. delete the extracted directory ```rm -rf <packages>```
+1. Extract the archive with `tar -xf <package>.tar.gz`.
+2. Enter the extracted directory with `cd <package>`.
+3. Follow the package-specific compilation instructions.
+4. Return to the sources directory with `cd $LFS/sources`.
+5. Remove the extracted directory with `rm -rf <package>`.
 
-## All the Tools from Cross-Tool-Chain
+## Cross-Toolchain Components
 
 1. [Compile binutils](https://www.linuxfromscratch.org/lfs/view/stable/chapter05/binutils-pass1.html)
 2. [Compile cross GCC](https://www.linuxfromscratch.org/lfs/view/stable/chapter05/gcc-pass1.html)
-3. [Install linux API header](https://www.linuxfromscratch.org/lfs/view/stable/chapter05/linux-headers.html)
-4. [Compile GlibC](https://www.linuxfromscratch.org/lfs/view/stable/chapter05/glibc.html)
-5. [Compile Libstdc](https://www.linuxfromscratch.org/lfs/view/stable/chapter05/gcc-libstdc++.html)
+3. [Install the Linux API headers](https://www.linuxfromscratch.org/lfs/view/stable/chapter05/linux-headers.html)
+4. [Compile Glibc](https://www.linuxfromscratch.org/lfs/view/stable/chapter05/glibc.html)
+5. [Compile libstdc++](https://www.linuxfromscratch.org/lfs/view/stable/chapter05/gcc-libstdc++.html)
 
 <br><br><br>
 
-# Next part : [Cross Compiling Temporary Tools](./temptools.md)
+# Next: [Cross-Compile the Temporary Tools](./temptools.md)

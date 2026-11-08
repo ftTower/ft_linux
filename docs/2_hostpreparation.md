@@ -2,7 +2,7 @@
 
 ## Host system requirements
 
-I used this script from the manual to verify if my host system has all the requirements.
+I used the following script from the LFS book to verify that my host system met all the requirements.
 
 ```bash
 cat > version-check.sh << "EOF"
@@ -101,77 +101,76 @@ EOF
 bash version-check.sh
 ```
 
-I've got many `ERROR` with this checker so i had to make some adjustements.
+The checker reported several `ERROR` messages, so I had to make a few adjustments.
 
 
-> This as fix the versoin problem for coreutils (it was from uutils packages and not gnu).
+> This fixed the Coreutils version problem. The installed package came from the `uutils` project instead of GNU.
 ```bash
 sudo apt install --allow-remove-essential coreutils-from-gnu coreutils-from-uutils-
 ```
 
-> `bison gawk m4 texi2any` where reported missing by the script so i downloaded them.
+> The script reported `bison`, `gawk`, `m4`, and `texi2any` as missing, so I installed them.
 ```bash
 sudo apt install bison gawk m4 texinfo
 ```
 
-> my sh was not symlinked to bash 
+> My `sh` shell was not symlinked to Bash.
 ```bash
 sudo ln -sf bash /bin/sh && ls -l /bin/sh
 ```
 
-> You should have 0 ERROR to continue on this.
+> You should have zero `ERROR` messages before continuing.
 <div align="center">
   <img src="../images/hostrequirements.png"/>
 </div>
 
 ## Creating Partitions
 
-[Chapter02 : Creating Partition](https://www.linuxfromscratch.org/lfs/view/stable/chapter02/creatingpartition.html)
+[Chapter 2: Creating Partitions](https://www.linuxfromscratch.org/lfs/view/stable/chapter02/creatingpartition.html)
 
-Creating the partitions is often done with two main tools : [cfdisk](https://fr.wikipedia.org/wiki/Cfdisk) and [fdisk](https://fr.wikipedia.org/wiki/Fdisk), the main difference beetween them is graphical.
+Partitioning is commonly done with one of two tools: [cfdisk](https://fr.wikipedia.org/wiki/Cfdisk) or [fdisk](https://fr.wikipedia.org/wiki/Fdisk). The main difference between them is that `cfdisk` provides a graphical interface.
 
 > [!NOTE]
-> In my case i will use `Fdisk`.
+> In this guide, I use `fdisk`.
 
 Here you can find the [Fdisk man](https://man.archlinux.org/man/fdisk.8.en).
 
-The first parameter i used is `-l`, this will **list all partitions** already on your **host system**.
+The first option I use is `-l`, which **lists all partitions** on your **host system**.
 ```bash
-sudo fdisk -l # you can try this without risk on your personal laptop for education purpose.
+sudo fdisk -l # You can run this safely on a personal laptop for educational purposes.
 ```
 
-> You will see many `/dev/loopX`, those are packages mounted like virtual disk by linux to use them without decompressing them.
+> You may see several `/dev/loopX` devices. Linux uses them to mount packages as virtual disks without extracting them.
 <div align="center">
   <img src="../images/part_fdiskloop.png"/>
 </div>
 
-> This is the interesting part, you will see two partitions made on the virtual disk.
-- `/dev/sda1` of 1MB is the partition needed to host the boot.
-- `/dev/sda2` of 25GB is the partition for the root directory (where all will be stocked).
+> The important part is the virtual disk, which contains two partitions:
+- `/dev/sda1`, with a size of 1 MB, is used to store the boot files.
+- `/dev/sda2`, with a size of 25 GB, is used for the root directory and its contents.
 <div align="center">
   <img src="../images/part_fdisksda.png"/>
 </div>
 
-The next step will be to create our personal partitions for our distribution. 
+The next step is to create the partitions for the new distribution.
 
 > [!CAUTION]
-> School subject :  
-> You must use at least 3 different partitions: root, /boot and a swap partition. You
-> can, of course, make more partitions if you want to.
+> Course requirement:
+> You must use at least three partitions: `/`, `/boot`, and a swap partition. You can create additional partitions if needed.
 
 
 ### Partitions Explanation
 
 > [!WARNING]
-> You have the choice for the size of each partition, but you have to refer to the tutorial to see the minimum required
+> You can choose the size of each partition, but refer to the tutorial for the minimum requirements.
 
-- **root** - *35go* : This will contain all the linux file system, this is the only mandatory partition for linux to work. (common format : ext4, btrfs, xfs)
-- **/boot** - *1go* : Contain all the files necessary for starting the system. Nowadays the main reasons to separate it from root is to load the program who ask the disk password if the root partition is encrypted, and if you use complex storage like RAID for servers  
-- **swap** - *4go* : This partition is not a naviguable memory but will act like an extension of your RAM on the disk. The RAM in case of overflow will move temporary inactive data into this partition to avoid the system to freeze. In case of system hibernation it can also move all the RAM content into it, so the system at the awakening will load it in the RAM from this partition.
+- **root** - *35 GB*: This contains the entire Linux file system and is the only partition required for Linux to operate. Common file systems include `ext4`, `btrfs`, and `xfs`.
+- **`/boot`** - *1 GB*: This contains the files required to start the system. It is commonly separated from the root partition when the root file system is encrypted or when complex storage such as RAID is used.
+- **swap** - *4 GB*: This partition acts as an extension of RAM on disk. When RAM is full, the system can move temporarily inactive data to swap to avoid freezing. During hibernation, it can also store the contents of RAM so they can be restored when the system resumes.
 
 ---
 
-To facilitate the export of my LFS and the developpement practicity, i will create a new virtual disk attached to my host system.
+To simplify exporting my LFS system and make development more convenient, I will create a new virtual disk attached to the host system.
 
 <div align="center">
   <img src="../images/part_createhdisk.png"/>
@@ -181,26 +180,25 @@ To facilitate the export of my LFS and the developpement practicity, i will crea
   <img src="../images/part_paramhdisk.png"/>
 </div>
 
-Finally we can create partitions, i used [this](https://doc.ubuntu-fr.org/fdisk) tutorial explaning how to use fdisk utilities.
+We can now create the partitions. I used [this tutorial](https://doc.ubuntu-fr.org/fdisk), which explains how to use the `fdisk` utilities.
 
-List all partitions with `sudo fdisk -l` 
+List all partitions with `sudo fdisk -l`.
 
 > [!CAUTION]
-> our new virtual disk must be /dev/sdb but it is possible to have another name if you have already more vdisk, in my tutorial i will assume you have `sdb` but adapt it to your case.
+> The new virtual disk will usually be `/dev/sdb`, but it may have a different name if other virtual disks are present. This guide assumes the disk is `sdb`; adapt the commands to your system.
 
 <div align="center">
   <img src="../images/part_showsdb.png"/>
 </div>
 
-Next step is to enter edit mode with `fdisk` using ```sudo fdisk /dev/sdb```
+Enter editing mode with `fdisk` by running `sudo fdisk /dev/sdb`.
 
-To be secure with my new virtual disk the first thing i do is just `o` it will 
-create a new fresh [MBR DOS table.](https://en.wikipedia.org/wiki/Master_boot_record)
+To start with a clean partition table, enter `o`. This creates a new [MBR partition table](https://en.wikipedia.org/wiki/Master_boot_record).
 <div align="center">
   <img src="../images/part_showsdb.png"/>
 </div>
 
-### Creating /boot partition
+### Creating the `/boot` Partition
 
 > [!WARNING]
 > On my screenshots i forgot to add the `G` after end size sector
@@ -219,7 +217,7 @@ a -> make the partition bootable
   <img src="../images/part_createboot.png"/>
 </div>
 
-### Creating swap partition
+### Creating the Swap Partition
 
 > [!WARNING]
 > On my screenshots i forgot to add the `G` after end size sector
@@ -241,7 +239,7 @@ t -> change type of partition
   <img src="../images/part_createswap.png"/>
 </div>
 
-### Creating root partition
+### Creating the Root Partition
 
 ```bash
 # in fdisk console
@@ -255,9 +253,9 @@ ENTER -> fill the rest of vdisk
   <img src="../images/part_createroot.png"/>
 </div>
 
-### Exit fdisk console
+### Exiting the `fdisk` Console
 
-to clean escape from fdisk console enter `w`
+To save the changes and exit the `fdisk` console, enter `w`.
 
 ## Creating a file system 
 

@@ -1,30 +1,30 @@
-# Installing sources packages
+# Installing Source Packages
 
 ## Downloading Sources
 
-We need to make a directory to host the sources.
+Create a directory to store the source packages.
 
 ```bash
 sudo mkdir -v $LFS/sources 
 ```
 
-and make it sticky.
+Set the sticky bit on the directory.
 
-> ![NOTE]
-> A sticky directory (or a directory with the sticky bit set) is a shared folder on Unix-like systems where only the file owner, the directory owner, or the root user can delete or rename files
+> [!NOTE]
+> A sticky directory is a shared directory on a Unix-like system where only the file owner, the directory owner, or the root user can delete or rename files.
 ```bash
 sudo chmod -v a+wt $LFS/sources
 ```
 
-Next step is to download the file containing all the lfs sources links.
+Download the file containing the links to all LFS sources.
 
 ```bash
 sudo wget https://www.linuxfromscratch.org/lfs/view/stable/wget-list-sysv -P $LFS/sources/
 ```
-> ![TIP]
-> I decide to download files like `wget-list-sysv` or after `md5sums` with root user to avoid being block after with a user who will not remain on my lfs. 
+> [!TIP]
+> I download files such as `wget-list-sysv` and `md5sums` as root. This avoids permission problems later when using a user that will not remain in the LFS system.
 
-And use it to download all the sources with wget into the directory `$LFS/sources`
+Use the list to download all source packages with `wget` into `$LFS/sources`.
 ```bash
 sudo wget --input-file=$LFS/sources/wget-list-sysv --continue --directory-prefix=$LFS/sources
 ```
@@ -33,14 +33,14 @@ sudo wget --input-file=$LFS/sources/wget-list-sysv --continue --directory-prefix
   <img src="../images/packages_sum.png"/>
 </div>
 
-This file is a list of shasum next to linked packages name, we will using it to verify that we have the exact same file from the creator.
+This file lists the checksums alongside the package names. We will use it to verify that each downloaded file matches the version provided by the LFS project.
 ```bash
 sudo wget https://www.linuxfromscratch.org/lfs/view/stable/md5sums -P $LFS/sources/
 ```
 
-This next command will use that new file to compare the checksum.
-> ![NOTE]
-> This is great to verify that all our sources have encounter no problems during the downloads.
+The following command uses this file to verify the checksums.
+> [!NOTE]
+> This confirms that the source files were not corrupted during the download.
 
 ```bash
 pushd $LFS/sources
@@ -48,4 +48,4 @@ pushd $LFS/sources
 popd
 ```
 
-# Next part : [Creating LFS env and first user](./lfsenvironnement.md)
+# Next: [Create the LFS Environment and First User](./lfsenvironnement.md)

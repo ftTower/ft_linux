@@ -1,14 +1,14 @@
-# System Host Creation
+# Creating the Host System
 
-## Setup the host system.
+## Set Up the Host System
 
-To develop this `Linux from scratch` i need a Host system, i choose [ubuntu](https://ubuntu.com/download/desktop) desktop but you can do it with **any** linux distribution.
+To build `Linux From Scratch`, you need a host system. I chose [Ubuntu Desktop](https://ubuntu.com/download/desktop), but you can use **any** Linux distribution.
 
 ---
 
-### Create the virtual machine following those steps :
+### Create the Virtual Machine
 
-> Im using `virtualbox-7.2_7.2.20` for `debian 13.6`.
+> I used `virtualbox-7.2_7.2.20` with `Debian 13.6`.
 
 <div align="center">
   <img src="../images/vm_creation.png"/>
@@ -16,7 +16,7 @@ To develop this `Linux from scratch` i need a Host system, i choose [ubuntu](htt
 
 ---
 
-> Choose a easy password you will remember.
+> Choose an easy-to-remember password.
 
 <div align="center">
   <img src="../images/vm_auth.png"/>
@@ -24,7 +24,7 @@ To develop this `Linux from scratch` i need a Host system, i choose [ubuntu](htt
 
 ---
 
-> Choose (RAM / CPU / DISK) in function of your computer.
+> Choose the amount of RAM, CPU, and disk space according to your computer's resources.
 
 <div align="center">
   <img src="../images/vm_vhardware.png"/>
@@ -32,7 +32,7 @@ To develop this `Linux from scratch` i need a Host system, i choose [ubuntu](htt
 
 ---
 
-> Let it load Ubuntu.
+> Let Ubuntu start.
 
 <div align="center">
   <img src="../images/vm_start.png"/>
@@ -40,7 +40,7 @@ To develop this `Linux from scratch` i need a Host system, i choose [ubuntu](htt
 
 ---
 
-> Those settings are up to you.
+> These settings are up to you.
 
 <div align="center">
   <img src="../images/vm_welcome.png"/>
@@ -48,7 +48,7 @@ To develop this `Linux from scratch` i need a Host system, i choose [ubuntu](htt
 
 ---
 
-> Finally the host system is up and functional.
+> The host system is now installed and ready to use.
 
 <div align="center">
   <img src="../images/vm_welcome2.png"/>
@@ -58,7 +58,7 @@ To develop this `Linux from scratch` i need a Host system, i choose [ubuntu](htt
 
 ---
 
-> Let save this part with a snapshot `otherwhise on the machine : Host + T`
+> Save this state as a snapshot. Otherwise, you can restore the machine to this point with `Host + T`.
 
 <div align="center">
   <img src="../images/vm_snapshot.png"/>

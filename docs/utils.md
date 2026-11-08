@@ -1,8 +1,7 @@
+## Extracting a `.tar.gz` Archive
 
+Use the following command to extract an archive:
 
-
-
-> Untar .tar.gz
 ```bash
 tar -xf archive.tar.gz
 ```

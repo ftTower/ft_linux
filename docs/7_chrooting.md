@@ -9,7 +9,7 @@ case $(uname -m) in
 esac
 ```
 
-## Preparing Virtual Kernel File Systems
+## Preparing the Virtual Kernel File Systems
 
 ```bash
 mkdir -pv $LFS/{dev,proc,sys,run}
@@ -19,7 +19,7 @@ mkdir -pv $LFS/{dev,proc,sys,run}
 sudo mount -v --bind /dev $LFS/dev
 ```
 
-## Mounting Virtual Kernel File Systems
+## Mounting the Virtual Kernel File Systems
 
 ```bash
 mount -vt devpts devpts -o gid=5,mode=0620 $LFS/dev/pts
@@ -39,13 +39,13 @@ sudo mount -vt tmpfs tmpfs $LFS/run
 
 ---
 
-> In some host systems, /dev/shm is a symbolic link to a directory, typically /run/shm. The /run tmpfs was mounted above so in this case only a directory needs to be created with the correct permissions.
+> On some host systems, `/dev/shm` is a symbolic link to a directory, typically `/run/shm`. Because the `/run` `tmpfs` was mounted above, only a directory with the correct permissions needs to be created in this case.
 
-> In other host systems /dev/shm is a mount point for a tmpfs. In that case the mount of /dev above will only create /dev/shm as a directory in the chroot environment. In this situation we must explicitly mount a tmpfs:
+> On other host systems, `/dev/shm` is a mount point for a `tmpfs`. In that case, mounting `/dev` above only creates `/dev/shm` as a directory in the chroot environment. You must explicitly mount a `tmpfs` there:
 
 ---
 
-My system was in mount point case
+My system used the second configuration, where `/dev/shm` is a mount point.
 
 ```bash
 if [ -h $LFS/dev/shm ]; then
@@ -68,7 +68,7 @@ sudo chroot "$LFS" /usr/bin/env -i   \
     /bin/bash --login
 ```
 
-##
+## Creating the Directory Layout
 
 ```bash
 mkdir -pv /{boot,home,mnt,opt,srv}
@@ -164,20 +164,20 @@ chmod -v 664  /var/log/lastlog
 chmod -v 600  /var/log/btmp
 ```
 
-> The /var/log/wtmp file records all logins and logouts. The /var/log/lastlog file records when each user last logged in. The /var/log/faillog file records failed login attempts. The /var/log/btmp file records the bad login attempts.
+> The `/var/log/wtmp` file records all logins and logouts. The `/var/log/lastlog` file records when each user last logged in. The `/var/log/faillog` file records failed login attempts. The `/var/log/btmp` file records unsuccessful login attempts.
 
-> The /run/utmp file records the users that are currently logged in. This file is created dynamically in the boot scripts.
+> The `/run/utmp` file records the users who are currently logged in. This file is created dynamically by the boot scripts.
 
-## Installing more packages
+## Installing Additional Packages
 
 1. [Gettext](https://www.linuxfromscratch.org/lfs/view/stable/chapter07/gettext.html)
 2. [Bison](https://www.linuxfromscratch.org/lfs/view/stable/chapter07/bison.html)
-3. [Pearl](https://www.linuxfromscratch.org/lfs/view/stable/chapter07/perl.html)
+3. [Perl](https://www.linuxfromscratch.org/lfs/view/stable/chapter07/perl.html)
 4. [Python](https://www.linuxfromscratch.org/lfs/view/stable/chapter07/Python.html)
 5. [Texinfo](https://www.linuxfromscratch.org/lfs/view/stable/chapter07/texinfo.html)
 6. [Util-linux](https://www.linuxfromscratch.org/lfs/view/stable/chapter07/util-linux.html)
 
-## Cleaning and Backup
+## Cleaning and Backing Up
 
 ```bash
 rm -rf /usr/share/{info,man,doc}/*
@@ -211,12 +211,12 @@ cd $LFS
 tar -cJpf $HOME/lfs-temp-tools-12.4.tar.xz .
 ```
 
-## RESTORE FROM BACKUP
+## Restoring from the Backup
 
 [DOC](https://www.linuxfromscratch.org/lfs/view/stable/chapter07/cleanup.html)
 
 > [!WARNING]
-> BE CAREFUL THIS CAN DELETE THE HOST SYSTEM IF NOT IN $LFS
+> Be careful: running these commands outside `$LFS` can delete files from the host system.
 
 ```bash
 cd $LFS

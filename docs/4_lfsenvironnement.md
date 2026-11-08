@@ -1,46 +1,46 @@
-# Preparing LFS Environnement
+# Preparing the LFS Environment
 
 ## Creating a Limited Directory Layout
 
-First we need to create the basic directory for our lfs.
+First, create the basic directory structure for LFS.
 
 ```bash
-sudo mkdir -pv $LFS/{etc,var} $LFS/usr/{bin,lib,sbin} # make etc+var in root directory and add bin+lib+sbin in the usr directory
+sudo mkdir -pv $LFS/{etc,var} $LFS/usr/{bin,lib,sbin} # Create etc and var in the root directory, and bin, lib, and sbin in usr.
 
 for i in bin lib sbin; do
-  sudo ln -sv usr/$i $LFS/$i # for each one make a symbolic link into the root 
+  sudo ln -sv usr/$i $LFS/$i # Create a symbolic link in the root directory for each directory.
 done
 
 case $(uname -m) in
-  x86_64) sudo mkdir -pv $LFS/lib64 ;; # in case the system is under x64/84 architecture make a lib64 into root
+  x86_64) sudo mkdir -pv $LFS/lib64 ;; # Create lib64 for the x86_64 architecture.
 esac
 ```
 
-make a `tools` directory for the compiled sources 
+Create a `tools` directory for the compiled sources.
 ```bash
 mkdir -pv $LFS/tools
 ```
 
-## Creating The First User
+## Creating the First User
 
-We are gonna make the first user for our lfs in the group lfs 
+Create the first LFS user and add it to the `lfs` group.
 ```bash
 groupadd lfs
 useradd -s /bin/bash -g lfs -m -k /dev/null lfs
 ```
 
-> `-s` specify the default bash for the created user
-> `-g lfs` add this user to the group lfs
-> `-m` this create a home directory for the user
-> `-k /dev/null` this parameter prevents possible copying of files from a skeleton directory 
-> `lfs` the user created
+> `-s` specifies the default shell for the new user.
+> `-g lfs` adds the user to the `lfs` group.
+> `-m` creates a home directory for the user.
+> `-k /dev/null` prevents files from being copied from a skeleton directory.
+> `lfs` is the name of the new user.
 
-put a password on the `lfs` user with :
+Set a password for the `lfs` user:
 ```bash
 sudo passwd lfs
 ```
 
-## Creating His Environnement
+## Creating the User Environment
 
 ```bash
 chown -v lfs $LFS/{usr{,/*},var,etc,tools}
