@@ -11,3 +11,8 @@
 9. [File](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/file.html)
 10. [Readline](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/readline.html)
 11. [M4](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/m4.html)
+12. [Bc](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/bc.html)
+13. [Flex](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/flex.html)
+14. [Tcl](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/tcl.html)
+15. [Expect](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/expect.html)
+16. [DejaGNU](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/dejagnu.html)
