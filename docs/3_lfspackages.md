@@ -18,11 +18,15 @@ sudo chmod -v a+wt $LFS/sources
 
 Download the file containing the links to all LFS sources.
 
+> [!CAUTION]
+> The original `wget-list-sysv` contain a deprecated link of `ncurses-6.5-20250809`.
+> This reddit gave an alternative : [r/linuxfromscratch](https://www.reddit.com/r/linuxfromscratch/comments/1tadaqd/quick_solution_for_ncurses6520250809tgz_404/?tl=fr)  
+
+
+I recommend you to download the file from my git where i changed the deprecated ncurses link. 
 ```bash
-sudo wget https://www.linuxfromscratch.org/lfs/view/stable/wget-list-sysv -P $LFS/sources/
+sudo wget "https://raw.githubusercontent.com/ftTower/ft_linux/refs/heads/main/configuration/wget-sysv-list" -P $LFS/sources/
 ```
-> [!TIP]
-> I download files such as `wget-list-sysv` and `md5sums` as root. This avoids permission problems later when using a user that will not remain in the LFS system.
 
 Use the list to download all source packages with `wget` into `$LFS/sources`.
 ```bash
@@ -48,4 +52,4 @@ pushd $LFS/sources
 popd
 ```
 
-# Next: [Create the LFS Environment and First User](./lfsenvironnement.md)
+## Next: [Create the LFS Environment and First User](./lfsenvironnement.md)
