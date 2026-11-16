@@ -27,4 +27,12 @@
 25. [Libxcrypt](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/libxcrypt.html)
 26. [Shadow](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/shadow.html)
 27. [Gcc](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/gcc.html)
+28. [Ncurses](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/ncurses.html)
+29. [Sed](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/sed.html)
+30. [Psmisc](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/psmisc.html)
+31. [Bison](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/bison.html)
+32. [Grep](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/grep.html)
+33. [Bash](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/bash.html)
+34. [Libtool](https://www.linuxfromscratch.org/lfs/view/stable/chapter08/libtool.html)
+35. []
 
